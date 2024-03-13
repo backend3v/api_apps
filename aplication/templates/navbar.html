@@ -1,0 +1,60 @@
+{% macro render_todo(text,menu) %}
+<nav class="navbar-expand-lg text-center">
+    <div class="navbar_a">
+        <div class="gap-1" style="width:100%">
+            <div class="row-1" style="display:flex;width:100%;align-items: center;">
+                <div class="col d-flex">
+                    <a class="row-1 bot center_text" href="{{ url_for('home') }}">Home</a>
+                </div>
+                <div class="col d-flex">
+                    <div class="full dropdown d-flex" width=100%>
+                        <a class="bot center_text" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Apps
+                        </a>
+                        <div class="bot dropdown-menu">
+                            <a class="bot center_text" href="{{ url_for('index_app_en') }}">AppEnglish</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col d-flex">
+                    <button class="row-1 bot btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseMenu" aria-expanded="false" aria-controls="collapseExample">
+                        {{ text }}
+                    </button>
+                </div>
+                <div class="col d-flex">
+                    <form class="d-flex row-1" role="search" style="
+                    padding: 0px;
+                    margin: 0px;
+                ">
+                        <input class="row-1 form-control" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+                <div class="col d-flex">
+                    <div class="row-1 d-flex">
+                        <div class="row-1 dropdown d-flex">
+                            <a class="bot center_text" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Yo
+                            </a>
+                            <div class="bot row-1 dropdown-menu">
+                                <a class="bot center_textdropdown-item" href="{{ url_for('exit') }}">Cerrar
+                                    Sesion</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+    <div class="collapse" id="collapseMenu">
+        {% include menu %}
+    </div>
+
+</nav>
+{% endmacro %}

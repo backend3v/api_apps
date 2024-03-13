@@ -1,0 +1,133 @@
+body {
+    --main-color-base: #000033;
+    --main-color-secundary: #006699;
+    --main-color-text1: #FFFFCC;
+    --main-color-text2: #FF5733;
+    background-color: var(--main-color-base);
+}
+
+html * {
+    font-family: sans-serif;
+    background-color: var(--main-color-base);
+    color: var(--main-color-text1)
+}
+
+img {
+    max-width: 30px;
+}
+
+#sheldon {
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+    filter: sepia(100%);
+
+}
+
+#er5 {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 100%;
+    color: #e53935;
+}
+
+h2 {
+    width: 100%;
+    position: absolute;
+    top: 90%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #f9a825;
+}
+
+h3 {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #f9a825;
+}
+
+section {
+    text-align: center;
+}
+
+.row-1 {
+    height: calc(var(--main-height)*0.10);
+    width: 100%;
+
+}
+
+.pad {
+    padding: 3em;
+}
+
+.row-2 {
+    height: calc(var(--main-height)*0.8)
+}
+
+.row-3 {
+    height: calc(var(--main-height)*0.20);
+    color: var(--main-color-text1)
+}
+
+a {
+    color: var(--main-color-text2);
+    padding: 3px;
+
+}
+
+p {
+    color: var(--main-color-text2)
+}
+
+.full {
+    color: var(--main-color-text2);
+    background-color: var(--main-color-secundary);
+    width: 100%;
+    border: 0px;
+}
+
+.bot {
+    color: var(--main-color-text2);
+    background-color: var(--main-color-secundary);
+    width: 100%;
+    border: 0px;
+    padding: 1em;
+    margin: 0;
+    font-size: 1em;
+    line-height: 1em;
+}
+
+.center_text {
+    display: grid;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bot:hover {
+    text-decoration: none;
+    color: var(--main-color-text1);
+    cursor: pointer;
+
+}
+
+.navbar_a {
+    height: calc(var(--main-height)*0.05);
+    color: var(--main-color-text1);
+    display: flex;
+    align-items: center;
+}
+
+#videoplayer {
+    height: calc(var(--main-height)*0.8)
+}

@@ -1,0 +1,23 @@
+{% block head %}
+{{ bootstrap.load_css() }}
+<title>
+    {% block title %}Hello {% endblock %}
+</title>
+<link rel='stylesheet' href="{{ url_for('static', filename='css/main.css') }} ">
+<style id="style_base"></style>
+<script>
+    function initialize() {
+        var height = window.innerHeight
+        console.log(height)
+        document.getElementById("style_base").innerHTML = "body{--main-height: " + height.toString() + "px;}"
+    }
+</script>
+{% endblock %}
+
+<body onload="initialize()">
+    {{ bootstrap.load_js() }}
+
+
+    {% block content %}
+    {% endblock %}
+</body>

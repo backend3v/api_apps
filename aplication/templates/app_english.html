@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Home {% endblock %}
+{% import 'navbar.html' as macros %}
+
+{% block content %}
+{{ macros.render_todo('English Videos','menu_eng.html') }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"></script>
+<!-- <script type="text/javascript" charset="utf-8">
+    var socket = io.connect("http://localhost:3000", { forceNew: true });
+    socket.on('connect', function () {
+        socket.emit('my event', { data: 'I\'m connected!' });
+    });
+</script> -->
+<script type="text/javascript">
+
+</script>
+<script>
+    var initial_time = 0
+    var intervalID
+    var actual_item = 0
+    var end_actual_item = 0
+    var json_data = null
+    function addMessage(e) {
+        console.log(typeof (e))
+        var mensaje = e
+        // socket.on('mes', function (data) {
+        //     console.log('Received message from server: ' + data);
+        //     json_data = data
+        // });
+        // socket.emit("videos_subtitle", mensaje);
+        var player = document.getElementById("videoplayer")
+        var path = "static/video/" + e.toString() + ".mp4"
+        console.log(path)
+        //socket.emit("videos_subtitle", e);
+        var path =
+            player.setAttribute("src", path);
+        return false;
+    }
+    function callMonitor() {
+        intervalID = setInterval(start_time_monitor, 500);
+    }
+    function to_ms(list_number) {
+        a = parseFloat(list_number)
+        a = a.toFixed(3)
+        a = a * 1000
+        a = parseInt(a)
+        return a
+    }
+    function to_ms_2(tiempo) {
+        tiempo = tiempo.toString().split(":");
+        let hours = parseInt(tiempo[0]) * 3600000
+        let minutes = parseInt(tiempo[1]) * 60000
+        let seconds = parseInt(tiempo[2]) * 1000
+        let miliseconds = parseFloat(tiempo[2]) % 1000
+        miliseconds = miliseconds.toFixed(3)
+        miliseconds += parseInt(tiempo[3])
+        return miliseconds
+
+    }
+    function start_time_monitor() {
+        var player = document.getElementById("videoplayer")
+        var content = document.getElementById("content")
+        var time_player = player.currentTime
+        console.log(time_player)
+        ms_player = to_ms(time_player)
+        console.log("R > ", ms_player)
+        console.log("dd ==", json_data)
+        if (parseInt(end_actual_item) < parseInt(ms_player)) {
+            actual_item += 1
+            content.innerHTML = json_data[actual_item.toString()]["data"]
+            end_actual_item = parseInt(json_data[actual_item.toString()]["end"])
+        }
+
+
+
+
+    }
+    function stop_time_monitor() {
+        clearInterval(intervalID);
+    }
+
+</script>
+<div style="padding: 0;margin: 0;width: 100%;">
+    <div class="row-2">
+        <div width="100%">
+            <video width="100%" id="videoplayer" controls src="" onplay="callMonitor()" onpause="stop_time_monitor()"
+                type="video/mp4">
+            </video>
+        </div>
+    </div>
+    <div class="row-3">
+        <div class="col-10" width="70%">
+            <div id="content"></div>
+        </div>
+        <div class="col-2" width="30%">
+            <div id="content2"></div>
+        </div>
+    </div>
+
+</div>
+</div>
+{% endblock %}
