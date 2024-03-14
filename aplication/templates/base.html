@@ -15,7 +15,8 @@
 
 <body onload="initialize()">
 
-
+    {% import 'navbar.html' as macros %}
+    {{ macros.render_todo('...') }}
     {% block content %}
     {% endblock %}
 </body>
