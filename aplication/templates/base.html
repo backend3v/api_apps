@@ -13,10 +13,12 @@
 </script>
 {% endblock %}
 
-<body onload="initialize()">
-
-    {% import 'navbar.html' as macros %}
-    {{ macros.render_todo('...') }}
-    {% block content %}
-    {% endblock %}
-</body>
+<!-- <body onload="initialize()"> -->
+{% block body %}
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% endblock %}
+<!-- </body> -->

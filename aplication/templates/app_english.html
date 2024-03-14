@@ -12,6 +12,28 @@
     var actual_item = 0
     var end_actual_item = 0
     var json_data = null
+
+
+
+
+    function send_req(e) {
+
+        var data_content = document.getElementById("data_content")
+        var data_return = document.getElementById("data_return")
+        var u_form = document.getElementById("form_user")
+        data_content.value = e
+        data_return.value = "app_english"
+        u_form.submit()
+        // data = { msj: e }
+        // fetch('https://localhost:8000/traslate', {
+        //     method: "POST",
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: e.toString()
+        // }).then(res => {
+        //     console.log("Request complete! response:", res);
+        // });
+
+    }
     function addMessage(e) {
         console.log(typeof (e))
         var mensaje = e
@@ -20,6 +42,7 @@
         //     json_data = data
         // });
         // socket.emit("videos_subtitle", mensaje);
+        send_req(e.toString())
         var player = document.getElementById("videoplayer")
         var path = "static/video/" + e.toString() + ".mp4"
         console.log(path)
@@ -52,6 +75,8 @@
     function start_time_monitor() {
         var player = document.getElementById("videoplayer")
         var content = document.getElementById("content")
+        var menu_videos = document.getElementById("videos")
+        menu_videos.style.visibility = 'hidden'
         var time_player = player.currentTime
         console.log(time_player)
         ms_player = to_ms(time_player)
@@ -70,14 +95,27 @@
     function stop_time_monitor() {
         clearInterval(intervalID);
     }
+    function open_menu() {
+        var menu_videos = document.getElementById("videos")
+        menu_videos.style.visibility = 'visible'
+    }
 
 </script>
 <div style="padding: 0;margin: 0;width: 100%;">
     <div class="row-2">
+        <div class="row-2" style="z-index: 99;
+            position: absolute;
+            top: 0px;">
+            <div class="bot pad" for="btnradio1" onclick="open_menu()">videos</div>
+        </div>
         <div width="100%">
             <video width="100%" id="videoplayer" controls src="" onplay="callMonitor()" onpause="stop_time_monitor()"
                 type="video/mp4">
             </video>
+            <div id="videos" class="row-2 menu">
+                <label class="bot pad" for="btnradio1" onclick="addMessage('tbbt1_2')">tbbt1_2</label>
+                <label class="bot pad" for="btnradio2" onclick="addMessage('tbbt1_4')">tbbt1_4</label>
+            </div>
         </div>
     </div>
     <div class="row-3">
@@ -87,6 +125,12 @@
         <div class="col-2" width="30%">
             <div id="content2"></div>
         </div>
+    </div>
+    <div style="visibility: hidden;">
+        <form id="form_user" action="{{ url_for('send_subtitles') }}" method="post">
+            <input id="data_content" type="text" name="content">
+            <input id="data_return" type="text" name="return">
+        </form>
     </div>
 
 </div>

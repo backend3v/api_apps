@@ -54,7 +54,7 @@ class UserRoutes:
                     user = user[0]
                     print(str(type(user))," ",str(user))
                     session['token'] = True
-                    session['token_v'] = token
+                    session['token_v'] = token.decode()
                     session['user'] = user[0]
                     return render_template('home.html')
                 else:

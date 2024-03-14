@@ -128,6 +128,17 @@ p {
     align-items: center;
 }
 
+.flx {
+    display: flex;
+    align-items: center;
+}
+
+.menu {
+    z-index: 9999;
+    position: absolute;
+    top: 10%;
+}
+
 #videoplayer {
     height: calc(var(--main-height)*0.8)
 }

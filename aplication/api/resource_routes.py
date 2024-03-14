@@ -1,8 +1,9 @@
 
 from aplication.api.middlewares import middleware, middleware_jwt
-from flask import request, jsonify
+from flask import request, jsonify, render_template
 from infrastructure.resource_services import create as resource_create
 from infrastructure.exceptions import ApiError
+import re,json
 class ResourceRoutes:
     def __init__(self, app):
         self.app = app
@@ -26,6 +27,50 @@ class ResourceRoutes:
             else:
                 raise ApiError(message="Required Name, email and Password fields",code=400)
 
+
+        @self.app.route('/traslate', methods=['POST'])
+        @middleware
+        def send_subtitles():
+            data = json.dumps(request.form)
+            data = json.loads(data)
+            print(str(data),str(type(data)))
+            name = data['content']
+            print(str(name),str(type(name)))
+            with open(f'./static/video/{name}.txt') as file:
+                content = file.read()
+                print(content)
+            dict_result = {}
+            def to_ms(tiempo):
+                hours = int(tiempo[0]) * 3600000
+                minutes = int(tiempo[1]) * 60000
+                seconds = int(tiempo[2]) * 1000
+                miliseconds = seconds + minutes + hours
+                miliseconds += int(tiempo[2]) % 1000
+                miliseconds += int(tiempo[3])
+                return miliseconds
+            def process_match(obj_match):
+                obj = obj_match[0].split(sep="\n")
+                print(obj)
+                time = obj[1].split(sep=" --> ")
+                print(time)
+                time = time[1].replace(",",":")
+                time = time.split(":")
+                print(time)
+                new_list = []
+                for i in time:
+                    new_list.append(str(int(i)))
+                time = ":".join(new_list)
+                time = to_ms(new_list)
+                dict_obj ={"end":time,"data":obj[2]}
+                dict_result[obj[0]] = dict_obj
+                return str(obj)
+                
+            patron = r'([0-9]{1,2}\n[0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9]\s-->\s[0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9]\n[\w\s]*?[^\n]*)'
+            result = re.sub(patron, process_match,content)
+            if "return" in data.keys():
+                ret = data['return']
+                return render_template(f'{ret}.html')
+            return jsonify({"res":dict_result})
         # @self.app.route('/login', methods=['POST'])
         # @middleware
         # def login():

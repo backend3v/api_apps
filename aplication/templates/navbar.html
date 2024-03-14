@@ -1,59 +1,21 @@
-{% macro render_todo(text) %}
 <nav class="row-1">
-    <div class="navbar_a">
-        <div class="row-1" class="flx">
-            <div>
-                <a href="{{ url_for('home') }}">Home</a>
-            </div>
+    <div class="row-1 flx">
+        <div>
+            <a href="{{ url_for('home') }}">Home</a>
         </div>
-    </div>
-    <!-- <div style="width:100%">
-            <div class="row-1" class="flx">
-                <div>
-                    <a href="{{ url_for('home') }}">Home</a>
-                </div>
-                <div class="flx">
-                    <div class="full flx">
-                        <a>
-                            Apps
-                        </a>
-                        <div class="bot">
-                            <a class="bot" href="{{ url_for('index_app_en') }}">AppEnglish</a>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="flx">
-                    {{ text }}
-                </div>
-                <div class="flx">
-                    <form class="flx row-1" role="search" style="
-                    padding: 0px;
-                    margin: 0px;
-                ">
-                        <input class="row-1" type="search" placeholder="Search" aria-label="Search">
-                    </form>
-                </div>
-                <div class="flx">
-                    <div class="flx">
-                        <div class="flx">
-                            <select class="bot" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Yo
-                                <option value="exit" class="bot row-1">
-                                    <a class="bot " href="{{ url_for('exit') }}">Cerrar
-                                        Sesion</a>
-                                </option>
-                            </select>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="bot">
+            <a class="bot" href="{{ url_for('index_app_en') }}">AppEnglish</a>
+        </div>
+        <div class="flx">
+            <select class="bot" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <option value="">Yo</option>
+                <option value="exit" class="bot row-1">
+                    <a class="bot " href="{{ url_for('exit') }}">Cerrar
+                        Sesion</a>
+                </option>
+            </select>
 
         </div>
     </div>
-    </div> -->
 
 </nav>
-{% endmacro %}
