@@ -8,18 +8,20 @@ from aplication.api.test import TestRoutes
 from config import Config
 from flask_cors import CORS
 
+
+app = Flask(__name__,template_folder='aplication/templates')
 class Application:
     def __init__(self):
-        self.app = Flask(__name__,template_folder='aplication/templates')
-        CORS(self.app)
-        self.app.config['SECRET_KEY'] = Config().secret_app
+        #self.app = Flask(__name__,template_folder='aplication/templates')
+        CORS(app)
+        app.config['SECRET_KEY'] = Config().secret_app
         # UserRoutes(self.app)
         # ResourceRoutes(self.app)
         # HomeRoutes(self.app)
         # AppEnRoutes(self.app)
-        TestRoutes(self.app)
+        TestRoutes(app)
     def runner(self):
-        self.app.run(host=Config().host, port=Config().port,
+        app.run(host=Config().host, port=Config().port,
                      debug=Config().debu)
 
 def run_app():
