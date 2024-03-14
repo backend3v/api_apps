@@ -1,6 +1,4 @@
 from flask import Flask
-from flask_bootstrap import Bootstrap5
-from flask_socketio import SocketIO
 
 from aplication.api.user_routes import UserRoutes
 from aplication.api.resource_routes import ResourceRoutes
@@ -13,8 +11,6 @@ class Application:
     def __init__(self):
         self.app = Flask(__name__,template_folder='aplication/templates')
         CORS(self.app)
-        socketio = SocketIO(self.app)
-        bootstrap = Bootstrap5(self.app)
         self.app.config['SECRET_KEY'] = Config().secret_app
         UserRoutes(self.app)
         ResourceRoutes(self.app)

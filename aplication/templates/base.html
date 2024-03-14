@@ -1,5 +1,4 @@
 {% block head %}
-{{ bootstrap.load_css() }}
 <title>
     {% block title %}Hello {% endblock %}
 </title>
@@ -15,7 +14,6 @@
 {% endblock %}
 
 <body onload="initialize()">
-    {{ bootstrap.load_js() }}
 
 
     {% block content %}
