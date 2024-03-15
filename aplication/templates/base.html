@@ -13,12 +13,11 @@
 </script>
 {% endblock %}
 
-<!-- <body onload="initialize()"> -->
-{% block body %}
-{% block navbar %}
-{% include 'navbar.html' %}
-{% endblock %}
-{% block content %}
-{% endblock %}
-{% endblock %}
-<!-- </body> -->
+<body onload="initialize()">
+
+    {% block navbar %}
+    {% include 'navbar.html' %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+</body>

@@ -7,6 +7,7 @@ class Connection:
     def get_connection():
         connection = mysql.connector.connect(
             host=Config().db_host,
+            port=Config().db_port,
             user=Config().db_user,
             password=Config().db_password,
             database=Config().db_database

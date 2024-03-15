@@ -12,6 +12,7 @@ class Config:
         self.ttl_token = int(os.getenv('TTL'))
         self.iss = os.getenv('ISS')
         self.db_host = os.getenv('db_host')
+        self.db_port = os.getenv('db_port')
         self.db_user = os.getenv('db_user')
         self.db_password = os.getenv('db_password')
         self.db_database = os.getenv('db_database')

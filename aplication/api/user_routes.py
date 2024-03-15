@@ -19,15 +19,6 @@ class UserRoutes:
             response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, PUT, DELETE"
             response.headers["Access-Control-Allow-Headers"] = "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
             return response
-        @self.app.route('/test', methods=['GET'])
-        @middleware
-        def testing():
-            return jsonify({'body': 'Hello !!'})
-
-        @self.app.route('/test_jwt', methods=['GET'])
-        @middleware_jwt
-        def testing_jwt():
-            return jsonify({'body': 'Hello !!'})
         @self.app.route('/exit', methods=['POST','GET'])
         @middleware
         def exit():

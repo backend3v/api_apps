@@ -1,6 +1,6 @@
 
 from aplication.api.middlewares import middleware, middleware_jwt
-from flask import request, jsonify, render_template
+from flask import request, jsonify, render_template,make_response
 from infrastructure.resource_services import create as resource_create
 from infrastructure.exceptions import ApiError
 import re,json
@@ -28,7 +28,7 @@ class ResourceRoutes:
                 raise ApiError(message="Required Name, email and Password fields",code=400)
 
 
-        @self.app.route('/traslate', methods=['POST'])
+        @self.app.route('/subtitles', methods=['POST'])
         @middleware
         def send_subtitles():
             data = json.dumps(request.form)
@@ -38,7 +38,6 @@ class ResourceRoutes:
             print(str(name),str(type(name)))
             with open(f'./static/video/{name}.txt') as file:
                 content = file.read()
-                print(content)
             dict_result = {}
             def to_ms(tiempo):
                 hours = int(tiempo[0]) * 3600000
@@ -49,13 +48,14 @@ class ResourceRoutes:
                 miliseconds += int(tiempo[3])
                 return miliseconds
             def process_match(obj_match):
-                obj = obj_match[0].split(sep="\n")
-                print(obj)
+                
+                obj = obj_match.groups()[0]
+                print("OBJf-- ",str(obj))
+                obj = obj.split(sep="\n")
+                print("OBJf-- ",str(obj))
                 time = obj[1].split(sep=" --> ")
-                print(time)
                 time = time[1].replace(",",":")
                 time = time.split(":")
-                print(time)
                 new_list = []
                 for i in time:
                     new_list.append(str(int(i)))
@@ -63,13 +63,17 @@ class ResourceRoutes:
                 time = to_ms(new_list)
                 dict_obj ={"end":time,"data":obj[2]}
                 dict_result[obj[0]] = dict_obj
+                print("-----")
                 return str(obj)
-                
+            #print("DICT:: ",dict_result)
             patron = r'([0-9]{1,2}\n[0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9]\s-->\s[0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9]\n[\w\s]*?[^\n]*)'
-            result = re.sub(patron, process_match,content)
+            result = re.subn(patron, process_match,content)
+            #print("RES:: ",result)
             if "return" in data.keys():
                 ret = data['return']
-                return render_template(f'{ret}.html')
+                context = {"video":str(name)}
+                return render_template(f'{ret}.html',video={"title":name,"subtitles":dict_result})
+                #return jsonify(context)
             return jsonify({"res":dict_result})
         # @self.app.route('/login', methods=['POST'])
         # @middleware

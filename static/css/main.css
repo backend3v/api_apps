@@ -106,6 +106,17 @@ p {
     line-height: 1em;
 }
 
+.bot_s {
+    color: var(--main-color-text2);
+    background-color: var(--main-color-secundary);
+    width: 100%;
+    border: 0px;
+    padding: 0.5em;
+    margin: 0;
+    font-size: 1em;
+    line-height: 1em;
+}
+
 .center_text {
     display: grid;
     align-items: center;
@@ -137,6 +148,15 @@ p {
     z-index: 9999;
     position: absolute;
     top: 10%;
+    height: calc(var(--main-height)* 0.8);
+    width: 100%;
+
+}
+
+#videos {
+    left: 6%;
+    position: absolute;
+    top: 11%;
 }
 
 #videoplayer {

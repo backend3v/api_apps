@@ -15,10 +15,10 @@ class Application:
         #self.app = Flask(__name__,template_folder='aplication/templates')
         CORS(app)
         app.config['SECRET_KEY'] = Config().secret_app
-        # UserRoutes(self.app)
-        # ResourceRoutes(self.app)
-        # HomeRoutes(self.app)
-        # AppEnRoutes(self.app)
+        UserRoutes(app)
+        ResourceRoutes(app)
+        HomeRoutes(app)
+        AppEnRoutes(app)
         TestRoutes(app)
     def runner(self):
         app.run(host=Config().host, port=Config().port,
